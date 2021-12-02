@@ -1,67 +1,37 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-Route::get('/', function (){
-    return view('home', [
+use App\Models\Post;
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|   Utuy
+*/
+
+Route::get('/', function () {
+    return view('home' ,[
         "title" => "Home"
     ]);
 });
 
-Route::get('/about', function() {
+Route::get('/about', function () {
     return view('about', [
-    "title" => "About",
-    "name" => "Guntur Pongky Prayusti",
-    "email" => "gunturpongkyp@gmail.com",
-    "image" => "profile.jpeg"
+        "title" => "About" ,
+        "name" =>"Guntur Pongky Prayusti", 
+        "email"=>"gunturpongkyp@gmail.com" ,
+        "image" => "1.jpeg"
     ]);
 });
 
-Route::get('/blog', function () {
-    $blog_posts =[
-        [
-            "title" => " Judul Post Pertama",
-            "slug" => "judul-post-kedua",
-            "author" => "Guntur Pongky P",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ab, voluptatem sint praesentium quis quo, itaque blanditiis quaerat maxime fuga saepe quia qui voluptates architecto consequuntur ea numquam doloremque accusantium. Maiores, magnam amet! Sit necessitatibus in quae, veritatis nesciunt voluptatem molestiae minima dolore! Facere qui suscipit repudiandae illo, quos facilis delectus voluptatum minus iusto fugit quibusdam exercitationem explicabo consequuntur ex saepe, placeat dolores dolor. Ipsa voluptatem, dolorem quia inventore nisi, repellat aliquid reprehenderit iste numquam quae natus nemo quaerat enim?"
-        ],
-        [
-            "title" => " Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Guntur Pongky P",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ab, voluptatem sint praesentium quis quo, itaque blanditiis quaerat maxime fuga saepe quia qui voluptates architecto consequuntur ea numquam doloremque accusantium. Maiores, magnam amet! Sit necessitatibus in quae, veritatis nesciunt voluptatem molestiae minima dolore! Facere qui suscipit repudiandae illo, quos facilis delectus voluptatum minus iusto fugit quibusdam exercitationem explicabo consequuntur ex saepe, placeat dolores dolor. Ipsa voluptatem, dolorem quia inventore nisi, repellat aliquid reprehenderit iste numquam quae natus nemo quaerat enim?"
-        ],
-    ];
-    return view('posts', [
-        "title" => "posts",
-        "posts" => $blog_posts
-    ]); 
-    
-});
-
-Route::get('posts/{slug}', function($slug){
-    $blog_posts =[
-        [
-            "title" => " Judul Post Pertama",
-            "slug" => "judul-post-kedua",
-            "author" => "Guntur Pongky P",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ab, voluptatem sint praesentium quis quo, itaque blanditiis quaerat maxime fuga saepe quia qui voluptates architecto consequuntur ea numquam doloremque accusantium. Maiores, magnam amet! Sit necessitatibus in quae, veritatis nesciunt voluptatem molestiae minima dolore! Facere qui suscipit repudiandae illo, quos facilis delectus voluptatum minus iusto fugit quibusdam exercitationem explicabo consequuntur ex saepe, placeat dolores dolor. Ipsa voluptatem, dolorem quia inventore nisi, repellat aliquid reprehenderit iste numquam quae natus nemo quaerat enim?"
-        ],
-        [
-            "title" => " Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Guntur Pongky P",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ab, voluptatem sint praesentium quis quo, itaque blanditiis quaerat maxime fuga saepe quia qui voluptates architecto consequuntur ea numquam doloremque accusantium. Maiores, magnam amet! Sit necessitatibus in quae, veritatis nesciunt voluptatem molestiae minima dolore! Facere qui suscipit repudiandae illo, quos facilis delectus voluptatum minus iusto fugit quibusdam exercitationem explicabo consequuntur ex saepe, placeat dolores dolor. Ipsa voluptatem, dolorem quia inventore nisi, repellat aliquid reprehenderit iste numquam quae natus nemo quaerat enim?"
-        ],
-    ];
-
-    $new_post = [];
-    foreach($blog_posts as $post){
-        if($post["slug"] === $slug){
-            $new_post = $post;
-        }
-    }
-    return view('post', [
-        "title" => "Single Post",
-        "post" => $new_post
-    ]);
-});
+Route::get('/blog', [PostController::class, 'index']);
+// halaman single post
+Route :: get('posts/{slug}', [PostController::class, 'show']);
