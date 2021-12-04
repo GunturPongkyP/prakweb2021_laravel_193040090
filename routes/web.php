@@ -33,7 +33,7 @@ Route::get('/about', function () {
     return view('about', [
         "title" => "About",
         'active' => 'categories',
-        "name" => "Guntur pongky Prayusti",
+        "name" => "Guntur Pongky Prayusti",
         "email" => "gunturpongkyp@gmail.com",
         "image" => "1.jpeg"
     ]);
@@ -64,4 +64,6 @@ Route::get('dashboard',function(){
     return view('dashboard.index');
 })->middleware('auth');
 
+Route::get('dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])
+->Middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->Middleware('auth');
