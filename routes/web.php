@@ -31,8 +31,8 @@ Route::get('/about', function () {
     return view('about', [
         "title" => "About",
         'active' => 'categories',
-        "name" => "Guntur Pongky Prayusti",
-        "email" => "gunturpongkyp@gmail.com",
+        "name" => "Muhammd Rifqi Al Fauzaan",
+        "email" => "alfauzaan.rifqi@gmail.com",
         "image" => "1.jpeg"
     ]);
 });
@@ -55,3 +55,5 @@ Route::get('/categories', function () {
 Route::get('/login', [LoginController::class ,'index']);
 
 Route::get('/register', [RegisterController::class ,'index']);
+
+Route::post('/register', [RegisterController::class ,'store']);
