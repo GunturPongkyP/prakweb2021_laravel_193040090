@@ -1,16 +1,9 @@
 <?php
-
-use App\Models\Post;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-
-
 use App\Models\Category;
-use App\Models\User;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +24,7 @@ Route::get('/about', function () {
     return view('about', [
         "title" => "About",
         'active' => 'categories',
-        "name" => "Guntur pongky Prayusti",
+        "name" => "Guntur Pongky prayusti",
         "email" => "gunturpongkyp@gmail.com",
         "image" => "1.jpeg"
     ]);
@@ -44,10 +37,11 @@ Route::get('/categories', function () {
         'active' => 'categories', 
         'categories' => Category::all()
     ]);
-}); 
 });
-
 
 Route::get('/login', [LoginController::class ,'index']);
 
+Route::get('/register', [RegisterController::class ,'index']); 
 Route::get('/register', [RegisterController::class ,'index']);
+
+Route::post('/register', [RegisterController::class ,'store']);
