@@ -1,18 +1,24 @@
-@extends('layouts.main')
-@section('container')
+<?php
 
-<article>
-<h1 class = "mb-5">{{ $post->title }}</h1>
-<p>by. <a href="#" class="text-decoration-none">{{ $post->user->name }}</a>
-<a href="/categories/{{ $post->category->slug }}"class="text-decoration-none"
-> {{ $post->category->name }}</a></p>
-<p>By. <a href="/authors/{{ $post->author->username }}" class = "text-decoration-none">{{ $post->author->username }}</a> in <a href="/categories/{{ $post->category->slug }}" class = "text-decoration-none"> {{ $post->category->name }}</a></p>
+namespace App\Models;
 
-<h5>{{ $post->author }}</h5>
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-{!! $post->body !!}
-</article>
+class Post extends Model
+{
+    use HasFactory;
 
-<a href="/blog" class='d-block mt-3'>Back to Posts</a>
-<a href="/blog" class="d-block mt-3">Back to Posts</a>
-@endsection
+    // protected $fillable = ['title', 'excerpt', 'body'];
+    protected $guarded = ['id'];
+    protected $with = ['category', 'author'];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}
