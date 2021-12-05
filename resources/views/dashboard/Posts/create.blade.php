@@ -1,10 +1,8 @@
 @extends('dashboard.layouts.main')
-
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Create New Post</h1>
 </div>
-
 <div class="col-lg-8">
 <form method="post" action="/dashboard/posts" class="mb-5" enctype="multipart/form-data">
   @csrf
@@ -61,7 +59,6 @@
   <button type="submit" class="btn btn-primary">Create Post</button>
 </form>
 </div>
-
 <script>
     const title = document.querySelector('#title');
     const slug = document.querySelector('#slug');
@@ -80,11 +77,10 @@
       imgPreview.style.display = 'block';
       const oFReader = new FileReader();
       oFReader.readAsDataURL(image.files[0]);
+      
       oFReader.onload = function(oFREvent) {
         imgPreview.src = oFREvent.target.result;
       }
     }
 </script>
-
-
 @endsection
