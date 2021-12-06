@@ -14,7 +14,7 @@
     <!-- <y Styles -->
       <link rel="stylesheet" href="/css/style.css">
 
-    <title>Fahri's Blog | {{ $title }} </title>
+    <title>Utuy's Blog | {{ $title }} </title>
   </head>
   <body>
 
